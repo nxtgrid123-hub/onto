@@ -1,30 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Copy PDF</title>
+    <title>PDF Copy Page</title>
 
     <script>
         function copyPDF() {
-            const link = "https://yourusername.github.io/project/pdfs/sem6javasolvedslips (1).pdf";
-            navigator.clipboard.writeText(link);
-            alert("PDF link copied!");
+            // Change this to your real GitHub Pages link
+            const pdfLink = "sem6javasolvedslips (1).pdf";
+
+            navigator.clipboard.writeText(pdfLink)
+                .then(() => {
+                    alert("PDF link copied!");
+                });
         }
     </script>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        a {
+            display: block;
+            margin: 15px;
+            color: green;
+            font-size: 18px;
+        }
+    </style>
 </head>
 
-<body style="text-align:center; font-family:Arial;">
+<body>
 
-<h2>📄 My PDF</h2>
+<h2>📄 My PDF File</h2>
 
-<!-- View PDF -->
+<!-- Open PDF -->
 <a href="sem6javasolvedslips (1).pdf" target="_blank">Open PDF</a>
-<br><br>
 
-
-<!-- Copy Link -->
-<button onclick="copyPDF(sem6javasolvedslips (1).pdf)">Copy PDF Link</button>
+<!-- Copy PDF Link -->
+<button onclick="copyPDF()">Copy PDF Link</button>
 
 </body>
 </html>
-           
-   
