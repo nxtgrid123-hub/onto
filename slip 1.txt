@@ -1,0 +1,140 @@
+Q1. Write a Java program to display all the alphabets between 'A' to 'Z' after every 2
+seconds.
+Solution:
+class PrintAlphabets extends Thread{
+public void run(){
+char ch = 'A';
+while(ch<='Z'){
+try{
+System.out.print(ch+" ");
+Thread.sleep(1000);
+ch++;
+}catch(InterruptedException ie){
+System.out.println(ie);
+}
+}
+}
+}
+class TestPrintAlphabets{
+public static void main(String args[]){
+new PrintAlphabets().start();
+}
+}
+
+Q2. Write a Java program to accept the details of Employee (Eno, EName, Designation,
+Salary) from a user and store it into the database. (Use Swing)
+Solution:
+import java.sql.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+class EmployeeFrame extends JFrame implements ActionListener{
+Connection con;
+PreparedStatement pstmt;
+JLabel jl1,jl2,j13,jl4;
+JTextField jtf1,jtf2,jtf3,jtf4;
+JPanel jp;
+JButton jb;
+EmployeeFrame(){
+try{
+Class.forName("org.postgresql.Driver");
+con =
+DriverManager.getConnection("jdbc:postgresql://localhost/nsgacademy","sagrawal
+","mjain");
+pstmt = con.prepareStatement("insert into employee
+values(?,?,?,?)");
+setSize(700,300);
+setTitle("NSGAcademy");
+setLocationRelativeTo(null);
+jp = new JPanel();
+jp.setLayout(new GridLayout(4,2));
+jl1 = new JLabel("Employee No");
+jp.add(jl1);
+jtf1 = new JTextField(20);
+jp.add(jtf1);
+j12 = new JLabel("Employee Name");
+jp.add(j12);
+jtf2 = new JTextField(20);
+jp.add(jtf2);
+SURESH AGRAWAL 2
+NSG ACADEMY
+Contact: 9823782121/7276030223
+(Object Oriented Programming using Java - 11)
+j13 = new JLabel("Designation");
+jp.add(j13);
+jtf3 = new JTextField(20);
+jp.add(jtf3);
+j14 = new JLabel("Salary");
+jp.add(j14);
+jtf4 = new JTextField(20);
+jp.add(jtf4);
+add(jp, BorderLayout.CENTER);
+jb = new JButton("Add Record");
+add(jb, BorderLayout.SOUTH);
+jb.addActionListener(this);
+1st Floor, Pinaccle Pride,
+Above Maharashtra Electronics,
+Sadashiv Peth, Pune-30
+SPPU TYBCS
+setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+setVisible(true);
+}catch(ClassNotFoundException cnfe){
+JOptionPane.showMessageDialog(this, "Driver Not Found : "+cnfe,
+"Error", JOptionPane.ERROR_MESSAGE);
+dispose();
+}catch(SQLException sqle){
+JOptionPane.showMessageDialog(this, "SQLExcеption : "+sqle,
+"Error", JOptionPane. ERROR_MESSAGE);
+dispose();
+}catch(Exception e){
+JOptionPane.showMessageDialog(this, "Exception : "+e, "Error",
+JOptionPane. ERROR_MESSAGE);
+dispose();
+}
+}
+SURESH AGRAWAL 3
+NSG ACADEMY
+Contact: 9823782121 /7276030223
+1st Floor, Pinaccle Pride,
+Above Maharashtra Electronics,
+Sadashiv Peth, Pune-30
+(Object Oriented Programming using Java - I1) SPPU TYBCS
+public void actionPerformed (ActionEvent ae){
+if(jtf1.getText().equals("") || jtf2.getText().equals("") ||
+jtf3.getText().equals("") || jtf4.getText().equals(""))
+JOptionPane.showMessageDialog(this,"All inputs are mandatory",
+"Error", JOptionPane. ERROR_MESSAGE);
+else{
+try{
+int eno = Integer.parseInt(jtf1.getText());
+String ename = jtf2.getText();
+String designation = jtf3.getText();
+float salary = Float.parseFloat(jtf4.getText());
+if(ae.getSource()==jb){
+pstmt.setInt(1, eno);
+pstmt.setString(2,ename);
+pstmt.setString(3, designation);
+pstmt.setFloat(4, salary);
+pstmt.executeUpdate();
+JOptionPane.showMessageDialog(this,"Record Stored
+Successfully","Output",JOptionPane.INFORMATION_MESSAGE);
+}
+}catch(SQLException sqle){
+JOptionPane.showMessageDialog(this, "Error Executing DDL Query
+: "+sqle, "Error", JOptionPane.ERROR_MESSAGE);
+}catch(Exception e){
+JOptionPane.showMessageDialog(this, "Exception :
+"+e, "Error", JOptionPane. ERROR_MESSAGE);
+}
+}
+}
+}finally{
+jtf1.setText("");
+jtf2.setText("");
+jtf3.setText("");
+jtf4.setText("");
+jtf1.requestFocus();
+public static void main(String args[]){
+new EmployeeFrame();
+}
+}
